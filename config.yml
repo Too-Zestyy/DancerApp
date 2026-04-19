@@ -21,6 +21,8 @@ charset: "UTF-8"
 # configuration options.
 strict_config: 1
 
+# serializer: JSON
+
 # === Engines ===
 #
 # NOTE: All the engine configurations need to be under a single "engines:"
