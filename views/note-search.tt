@@ -1,0 +1,9 @@
+<div>
+    <h1>This is the note search template!</h1>
+    <form id="note-search-form">
+        <label for="note-name">Note Title:</label>
+        <input name="note-name" type="text"/>
+        <button type="submit">Search</button>
+    </form>
+    <h2><% note_query %></h2>
+</div>
