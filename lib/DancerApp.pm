@@ -13,10 +13,23 @@ get '/' => sub {
 
 get '/search' => sub {
     my $query = query_parameters->get('note-name');
-    template 'note-search' => {note_query => $query};
+
+    my $sth = database->prepare(
+    'SELECT "Id", "Title" FROM "Notes" WHERE "Title" LIKE \'%\' || :query || \'%\'',
+    );
+    $sth->bind_param(':query', $query);
+
+    $sth->execute;
+    my @res = @{$sth->fetchall_arrayref};
+
+    foreach my $elem (@res) {
+        push(@$elem, uri_for_route('note-by-id', { id => $elem->[0] }));
+    }
+
+    template 'note-search' => {note_query => $query, notes => \@res};
 };
 
-get '/:id' => sub {
+get 'note-by-id' => '/:id' => sub {
     content_type("application/json");
 
     # my $sth = database->prepare(

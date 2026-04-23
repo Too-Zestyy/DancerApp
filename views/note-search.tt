@@ -5,5 +5,16 @@
         <input name="note-name" type="text"/>
         <button type="submit">Search</button>
     </form>
-    <h2><% note_query %></h2>
+    <!-- <h2><% note_query %></h2> -->
+
+    <!-- <p><% notes %></p> -->
+    <ul class="centred-list">
+        <% FOR note IN notes -%>
+            <li>
+                <a href="<% note.2 %>"><h2><% note.1 %></h2></a>
+                <!-- <% note %>
+                <% note.1 %> -->
+            </li>
+        <% END -%>
+    </ul>
 </div>
