@@ -11,7 +11,7 @@ RUN cpanm App::cpanminus
 
 WORKDIR /deps
 
-COPY ./app/cpanfile ./cpanfile
+COPY ./back-end/cpanfile ./cpanfile
 
 RUN ls .
 RUN ["cpanm", "--installdeps", "."]

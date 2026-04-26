@@ -11,6 +11,23 @@ get '/' => sub {
     template 'index' => { 'title' => 'DancerApp' };
 };
 
+prefix '/api' => sub {
+    get '/test' => sub {
+        content_type("application/json");
+        response_header('Access-Control-Allow-Origin' => '*');
+        response_header('Access-Control-Allow-Methods' => 'GET');
+        response_header('Access-Control-Allow-Headers' => 'Content-Type, X-Requested-With');
+        return to_json({"data-from" => "dancer2"});
+    };
+
+    options '/test' => sub {
+        response_header('Access-Control-Allow-Origin' => '*');
+        response_header('Access-Control-Allow-Methods' => 'GET');
+        return;
+    };
+
+};
+
 get '/search' => sub {
     my $query = query_parameters->get('note-name');
 

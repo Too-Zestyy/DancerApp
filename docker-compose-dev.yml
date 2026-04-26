@@ -1,0 +1,33 @@
+services:
+  dancer-back-end:
+    # image: dancer-app-backend
+    build: 
+      context: .
+      dockerfile: ./dancer-dev.dockerfile
+    ports:
+        - "5000:5000"
+    volumes:
+      - type: bind
+        source: ./back-end
+        target: /app
+  vue-dev:
+    depends_on:
+      - dancer-back-end
+    build:
+      context: .
+      dockerfile: ./vue-dev.dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      # Bind mount source for hot module replacement
+      - ./vue-front-end:/app
+      # Anonymous volume to preserve container's node_modules
+      - /app/node_modules
+
+# volumes:
+#   src:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: ./app
