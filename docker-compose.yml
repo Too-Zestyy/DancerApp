@@ -2,7 +2,9 @@ services:
   dancer-back-end:
     # image: dancer-app-backend
     volumes:
-      - "./app:/app"
+      - type: bind
+        source: ./app
+        target: /app
     build: 
       context: .
       dockerfile: ./dancer-dev.dockerfile
