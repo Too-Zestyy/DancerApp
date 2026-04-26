@@ -1,0 +1,18 @@
+services:
+  dancer-back-end:
+    # image: dancer-app-backend
+    volumes:
+      - "./app:/app"
+    build: 
+      context: .
+      dockerfile: ./dancer-dev.dockerfile
+    ports:
+        - "5000:5000"
+
+# volumes:
+#   src:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: ./app
