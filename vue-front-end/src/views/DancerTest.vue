@@ -14,6 +14,6 @@ onMounted(async () => {
 </script>
 
 <template>
-    <h1>Dancer API Test (This is in a container!)</h1>
+    <h1>Dancer API Test</h1>
     <p>The Dancer API gave us... {{ count }}</p>
 </template>

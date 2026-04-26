@@ -22,6 +22,7 @@ services:
       # Bind mount source for hot module replacement
       - ./vue-front-end:/app
       # Anonymous volume to preserve container's node_modules
+      # also obscures host `note_modules` to prevent conflicts for the container
       - /app/node_modules
 
 # volumes:
