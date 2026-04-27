@@ -4,6 +4,7 @@ services:
     build: 
       context: .
       dockerfile: ./dancer-dev.dockerfile
+    # Open a public port so the back-end can be debugged if necessary
     ports:
         - "5000:5000"
     volumes:

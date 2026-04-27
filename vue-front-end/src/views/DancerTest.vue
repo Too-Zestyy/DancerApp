@@ -17,3 +17,9 @@ onMounted(async () => {
     <h1>Dancer API Test</h1>
     <p>The Dancer API gave us... {{ count }}</p>
 </template>
+
+<style lang="scss" scoped>
+h1 {
+  color: red;
+}
+</style>

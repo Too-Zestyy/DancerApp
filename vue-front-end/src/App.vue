@@ -7,4 +7,8 @@
   </main>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+body {
+  background-color: lightblue;
+}
+</style>
