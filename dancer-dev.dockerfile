@@ -15,7 +15,7 @@ COPY ./back-end/cpanfile ./cpanfile
 
 RUN ls .
 
-RUN apt update && apt install libdbd-pg-perl -y
+# RUN apt update && apt install libdbi-perl libdbd-pg-perl -y
 # libpq-dev 
 
 RUN cpanm --installdeps . --notest
