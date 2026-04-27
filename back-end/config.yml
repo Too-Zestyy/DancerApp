@@ -53,18 +53,18 @@ engines:
 plugins:
   Database:
       driver: 'Pg'
-      database: 'c_sharp_notes'
-      host: 'localhost'
+      database: 'postgres'
+      host: 'db'
       port: 5432
-      username: 'c_sharp_notes'
-      password: 'cSharp'
+      username: 'postgres'
+      password: 'aPasswordToReplace'
       connection_check_threshold: 10
       dbi_params:
           RaiseError: 1
           AutoCommit: 1
       # on_connect_do: ["SET NAMES 'utf8'", "SET CHARACTER SET 'utf8'" ]
       log_queries: 1
-      handle_class: 'DBIx::Core::Handle::ReturnValue'
+      # handle_class: 'DBIx::Core::Handle::ReturnValue'
 
 # session engine
 #

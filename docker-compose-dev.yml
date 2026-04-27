@@ -1,12 +1,27 @@
 services:
+  db:
+    image: postgres:18-alpine
+    container_name: postgres-dev
+    environment:
+      POSTGRES_PASSWORD: aPasswordToReplace
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    ports:
+      - "127.0.0.1:5432:5432"  # Expose to localhost only
+    networks:
+      - back-end-db-network
   dancer-back-end:
     # image: dancer-app-backend
+    networks:
+      - back-end-db-network
+    depends_on:
+      - db
     build: 
       context: .
       dockerfile: ./dancer-dev.dockerfile
     # Open a public port so the back-end can be debugged if necessary
     ports:
-        - "5000:5000"
+        - "127.0.0.1:5000:5000"
     volumes:
       - type: bind
         source: ./back-end
@@ -18,13 +33,20 @@ services:
       context: .
       dockerfile: ./vue-dev.dockerfile
     ports:
-      - "5173:5173"
+      - "127.0.0.1:5173:5173"
     volumes:
       # Bind mount source for hot module replacement
       - ./vue-front-end:/app
       # Anonymous volume to preserve container's node_modules
       # also obscures host `note_modules` to prevent conflicts for the container
       - /app/node_modules
+  
+volumes:
+  postgres_data:
+
+networks:
+  back-end-db-network:
+    driver: bridge
 
 # volumes:
 #   src:

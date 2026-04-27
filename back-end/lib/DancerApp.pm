@@ -7,6 +7,21 @@ use warnings;
 
 our $VERSION = '0.1';
 
+my $conn_state = 'disconnected';
+
+hook 'database_connected' => sub {
+    my $dbh = shift;
+    $conn_state = 'connected';
+};
+
+hook 'database_connection_failed' => sub {
+    $conn_state = 'failed';
+};
+
+hook 'database_error' => sub {
+    $conn_state = 'error';
+};
+
 get '/' => sub {
     template 'index' => { 'title' => 'DancerApp' };
 };
@@ -17,7 +32,7 @@ prefix '/api' => sub {
         response_header('Access-Control-Allow-Origin' => '*');
         response_header('Access-Control-Allow-Methods' => 'GET');
         response_header('Access-Control-Allow-Headers' => 'Content-Type, X-Requested-With');
-        return to_json({"data-from" => "dancer2"});
+        return to_json({"data-from" => "dancer2", "db_state" => $conn_state});
     };
 
     options '/test' => sub {
