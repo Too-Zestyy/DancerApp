@@ -21,6 +21,12 @@ hook 'database_connected' => sub {
         CONSTRAINT "PK_Notes" PRIMARY KEY ("Id")
     )
     ')->execute;
+
+    $dbh->prepare('
+    INSERT INTO public."Notes"("Id", "Title", "Content", "CreatedAt", "UpdatedAt")
+	VALUES (1, \'Hello!\', \'This is a note created on DB startup!\', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+    ON CONFLICT ("Id") DO NOTHING;
+    ')->execute;
 };
 
 # hook 'database_connection_failed' => sub {
