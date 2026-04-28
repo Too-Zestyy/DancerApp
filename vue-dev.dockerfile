@@ -5,7 +5,7 @@ VOLUME [ "/app" ]
 WORKDIR /app
 
 COPY ./vue-front-end/package.json ./vue-front-end/package-lock.json ./
-RUN npm ci
+RUN npm install
 
 # COPY . .
 
