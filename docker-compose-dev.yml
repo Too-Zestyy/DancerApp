@@ -7,7 +7,8 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql
     ports:
-      - "127.0.0.1:5432:5432"  # Expose to localhost only
+      - "127.0.0.1:5433:5433"  # Expose to localhost only
+    command: -p 5433
     networks:
       - back-end-db-network
   dancer-back-end:

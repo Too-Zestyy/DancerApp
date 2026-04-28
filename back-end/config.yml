@@ -55,7 +55,7 @@ plugins:
       driver: 'Pg'
       database: 'postgres'
       host: 'db'
-      port: 5432
+      port: 5433
       username: 'postgres'
       password: 'aPasswordToReplace'
       connection_check_threshold: 10
