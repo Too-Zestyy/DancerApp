@@ -56,6 +56,19 @@ prefix '/api' => sub {
         return;
     };
 
+    get 'note-by-id' => '/notes/:id' => sub {
+        response_header('Access-Control-Allow-Origin' => '*');
+        response_header('Access-Control-Allow-Methods' => 'GET');
+        content_type("application/json");
+
+        # my $sth = database->prepare(
+        #     'SELECT * FROM notes WHERE id = ?',
+        # );
+        # $sth->execute(params->{id});
+        
+        return to_json(database->quick_select('Notes', { Id => params->{id} }));
+    };
+
 };
 
 get '/search' => sub {
@@ -76,15 +89,19 @@ get '/search' => sub {
     template 'note-search' => {note_query => $query, notes => \@res};
 };
 
-get 'note-by-id' => '/:id' => sub {
-    content_type("application/json");
 
-    # my $sth = database->prepare(
-    #     'SELECT * FROM notes WHERE id = ?',
-    # );
-    # $sth->execute(params->{id});
+# TODO: Remove
+# get 'note-by-id' => '/:id' => sub {
+#     response_header('Access-Control-Allow-Origin' => '*');
+#         response_header('Access-Control-Allow-Methods' => 'GET');
+#     content_type("application/json");
+
+#     # my $sth = database->prepare(
+#     #     'SELECT * FROM notes WHERE id = ?',
+#     # );
+#     # $sth->execute(params->{id});
     
-    return to_json(database->quick_select('Notes', { Id => params->{id} }));
-};
+#     return to_json(database->quick_select('Notes', { Id => params->{id} }));
+# };
 
 true;

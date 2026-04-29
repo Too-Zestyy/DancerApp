@@ -1,6 +1,7 @@
 requires "Dancer2" => "2.1.0";
 requires "Dancer2::Plugin::Database" => "2.17";
 requires "DBD::Pg" => "3.20.0";
+requires "Starman" => "0.4018";
 
 recommends "YAML"                    => "0";
 recommends "URL::Encode::XS"         => "0";

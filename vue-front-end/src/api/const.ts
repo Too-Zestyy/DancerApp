@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // TODO: Replace this with prod API URL when deployed
-const PROD_API_BASE_URL = "https://prod.api.url.todo";
+const PROD_API_BASE_URL = "http://127.0.0.1:5000";
 
 // Specify API url based on environment
 const apiUrl = import.meta.env.PROD

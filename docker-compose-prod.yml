@@ -1,0 +1,57 @@
+services:
+  db:
+    image: postgres:18-alpine
+    container_name: dancerapp-postgres-prod
+    environment:
+      POSTGRES_PASSWORD: aPasswordToReplace
+    volumes:
+      - dancer_postgres_data_prod:/var/lib/postgresql
+    # ports:
+    #   - "127.0.0.1:5433:5433"  # Expose to localhost only
+    command: -p 5433
+    networks:
+      - back-end-db-network-prod
+  dancer-back-end-prod:
+    # image: dancer-app-backend
+    networks:
+      # Use separate networks between layers to isolate connections - intended to reduce security implications of e.g front-end being compromised
+      - back-end-db-network-prod
+    depends_on:
+      - db
+    build:
+      dockerfile: ./dancer-prod.dockerfile
+    # Open a public port so the back-end can be debugged if necessary
+    ports:
+        - "127.0.0.1:5000:5000"
+    # volumes:
+    #   - type: bind
+    #     source: ./back-end
+    #     target: /app
+  vue-prod:
+    depends_on:
+      - dancer-back-end-prod
+    build:
+      dockerfile: ./vue-prod.dockerfile
+    ports:
+      - "0.0.0.0:80:80"
+    # volumes:
+    #   # Bind mount source for hot module replacement
+    #   - ./vue-front-end:/app
+    #   # Anonymous volume to preserve container's node_modules
+    #   # also obscures host `note_modules` to prevent conflicts for the container
+    #   - /app/node_modules
+  
+volumes:
+  dancer_postgres_data_prod:
+
+networks:
+  back-end-db-network-prod:
+    driver: bridge
+
+# volumes:
+#   src:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: ./app

@@ -11,7 +11,7 @@ RUN cpanm App::cpanminus
 
 WORKDIR /deps
 
-COPY ./back-end/cpanfile ./cpanfile
+COPY ./back-end/cpanfile .
 
 RUN ls .
 
